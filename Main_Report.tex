@@ -104,11 +104,11 @@ After querying the data, the team found that the running scores of some hardware
 	\begin{center}
 		\includegraphics[scale=0.4]{Graphics/4520 final/Heat_map.png}
 	\end{center}
-	\caption{Architecture of our distributed certification service}
+	\caption{Correlation heatmap}
 	\label{fig:heat}
 \end{figure}
 
-As shown above, the group started off with the correlation heat map. It can be seen that all factors selected are positively correlated with the price in euros, while the GPU benchmark has the most significant value of correlation. However, the CPU benchmark appears to have a minimal correlation value with the price, which the team did not expect. 
+As shown above, the team started off with the correlation heat map. It can be seen that all factors selected are positively correlated with the price in euros, while the GPU benchmark has the most significant value of correlation. However, the CPU benchmark appears to have a minimal correlation value with the price, which the team did not expect. 
 
 \section{PREDICTION MODEL TRAINING}
 
@@ -116,7 +116,7 @@ As shown above, the group started off with the correlation heat map. It can be s
 
 \subsubsection{MULTIPLE LINEAR REGRESSION}
 
-The group first approach the data with linear regression. This method model the relationship between a scalar response Y and multiple explanatory variables $X_i$. In this case, benchmarking scores of CPU, GPU, RAM, memory, and weight are inputted as X. Price in euros is set to be Y. To ensure the regression result is fair, the group standardized all the X input before the data was input into the regression model. The default OLS regression model from the python library\cite{chen} is then been utilized, the result is shown in the figure below.
+The team first approached the data with linear regression. This method modeled the relationship between a scalar response Y and multiple explanatory variables $X_i$. In this case, benchmarking scores of CPU, GPU, RAM, memory, and weight are inputted as X. Price in euros was set to be Y. To ensure the regression result is fair, the team standardized all the X input before the data was input into the regression model. The default OLS regression model from the python library\cite{chen} was then been utilized, the result is shown in the figure below.
 
 \begin{figure}[H]
 	\begin{center}
@@ -218,7 +218,7 @@ dense\_18 (Dense)  & (None,  5)   & 105      &  &  \\
 dense\_19 (Dense)  & (None,  1)   & 6        &  &  \\ \cline{1-3}
 \begin{tabular}[c]{@{}l@{}}Total params: 1,431\\ Trainable params: 1,431\\ Non-trainable params: 0\end{tabular} &              &          &  &  \\ \cline{1-3}
 \end{tabular}
-    \caption{Parameters of Neural Network \texttt{localhost}.}
+    \caption{Parameters of Neural Network}
     \label{tab:params_table}
 \end{table}
 
@@ -247,7 +247,7 @@ Y_test = Y_test.reshape((-1, 1))
 	\begin{center}
 		\includegraphics[scale=1.0]{Graphics/Neural Network Images/NN4.png}
 	\end{center}
-	\caption{Standardized Data}
+	\caption{Standardized data distribution}
 	\label{fig:NN4}
 \end{figure}
 
@@ -269,7 +269,7 @@ x \;\;for \;\;\;x\geqslant 0
 
 \noindent Within this framework, the team used the following code to train the model:
 
-\begin{lstlisting}[language=Python, caption= Code for training overall data, basicstyle=\tiny,captionpos=b]
+\begin{lstlisting}[language=Python, caption= Code for training model for all features, basicstyle=\tiny,captionpos=b]
 
     model=Sequential([
         Dense(units=50,kernel_initializer='normal',activation='relu'),    
@@ -311,7 +311,7 @@ r2
 \begin{figure}[H]
          \centering
          \includegraphics[width=\textwidth]{Graphics/Neural Network Images/NN8.png}
-         \caption{Neural network output snapshot for overall data}
+         \caption{Neural network output snapshot for all features}
          \label{fig:NN7-8}
 \end{figure}
 
@@ -320,7 +320,7 @@ r2
 	\begin{center}
 		\includegraphics[scale=1.0]{Graphics/Neural Network Images/NN6.png}
 	\end{center}
-	\caption{MSE plot for overall data}
+	\caption{MSE plot for all features}
 	\label{fig:net}
 \end{figure}
 
@@ -501,7 +501,7 @@ r2_GPU_Intel
 \multicolumn{1}{|l|}{INTEL}    & \multicolumn{1}{l|}{0.165}                                                                         & \multicolumn{1}{l|}{0.156}                                                                         & \multicolumn{1}{l|}{0.157}                                                                         &  \\ \cline{1-4}
 
 \end{tabular}
-    \caption{ Results\texttt{localhost}.}
+    \caption{ Results}
     \label{tab:results_table}
 \end{table}
 
@@ -521,7 +521,7 @@ By collecting several parameters, adding several benchmarks as the new inputs, a
 \subsection{DATA COLLECTION}
 To better quantify the relationship between the five parameters chosen and the laptop price, the team substituted the score of each laptop component’s theoretical performance to the original model names, namely the benchmark. Doing so can give the potential customers a more precise metric to estimate if the price of the laptops and their components is set appropriately.\\
 \subsection{LINEAR REGRESSION}
-Using python as our programming language, After modeling, the $R^2$ of using all six parameters equal to 0.498. Due to the $R^2$ 's shortcomings, the team chose the GPU benchmark as our only independent variable to build the model, the coefficient of which is much higher than other parameters. As the $R^2$ of which is also not ideal, the team divided GPUs into 3 brands. As a result, AMD GPUs have significantly superior $R^2$ ratings than Intel GPUs. The group assumes this is because Intel's GPU performance in this dataset does not correspond to its price. Then the team randomly chose 70\% of the data set as the training data, the rest as test data, as the cross-validation method. All of the $R^2$ values for the test data are lower than but near to those for the corresponding training data, suggesting that these models are feasible.\\
+Using python as the team's programming language, After modeling, the $R^2$ of using all six parameters equal to 0.498. Due to the $R^2$ 's shortcomings, the team chose the GPU benchmark as the only independent variable to build the model, the coefficient of which is much higher than other parameters. As the $R^2$ of which is also not ideal, the team divided GPUs into 3 brands. As a result, AMD GPUs have significantly superior $R^2$ ratings than Intel GPUs. The group assumes this is because Intel's GPU performance in this dataset does not correspond to its price. Then the team randomly chose 70\% of the data set as the training data, the rest as test data, as the cross-validation method. All of the $R^2$ values for the test data are lower than but near to those for the corresponding training data, suggesting that these models are feasible.\\
 \subsection{NEURAL NETWORK REGRESSION}
 The second method used was neural network regression. Based on the experience, the team set 2 hidden layers. Mean square error was used as their metric. The MSE of training data and test data were relatively close. Additionally, the neural network's three GPU $R^2$s are all lower than those of linear regression, which goes somewhat against conventional wisdom. As a result, the team increased their ratio of training data to test data from 7:3 to 8:2 to 9:1. It shows that the $R^2$ of AMD and Nvidia keep going up as there are more and more training data comes into play.\\
 
