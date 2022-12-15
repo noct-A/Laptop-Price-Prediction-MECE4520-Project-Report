@@ -2,6 +2,7 @@
 \input{File_Setup.tex}
 \usepackage{graphicx}
 \usepackage{listings}
+\usepackage{hyperref}
 \usepackage{xcolor}
 \lstset { %
     language=Python,
@@ -33,7 +34,7 @@
 	\vspace{1.5cm}
 
 	\vfill
-	{\large Instructor: Changyao Chen}\par
+	{\Large Instructor: Changyao Chen}\par
 
 
 
@@ -66,24 +67,24 @@
 
 \section{INTRODUCTION}
 
-After 40 years of progress since the invention of the laptop in 1984, Laptops have been utilized for numerous purposes, for example, business, education, and recreational purposes. It is no secret that living a mobile lifestyle at home and work has become the new standard for people nowadays. Users expect and need to be able to access their computers from anywhere, whether it's the kitchen table or the office, which calls for portable devices. While desktop PC sales are down, laptop sales are increasing and are predicted to keep doing so. The laptop market segment was on a steadily increasing revenue trajectory even before the epidemic, growing from \$132 billion in 2018 to \$140 billion in 2020, according to a survey from Statista. \par
+After 40 years of progress since the invention of the laptop in 1984, Laptops have been utilized for numerous purposes, for example, business, education, and recreational purposes. It is no secret that living a mobile lifestyle at home and work has become the new standard for people nowadays. Users expect and need to be able to access their computers from anywhere, whether the kitchen table or the office, which calls for portable devices. While desktop PC sales are down, laptop sales are increasing and are predicted to continue. The laptop market segment was on a steadily increasing revenue trajectory even before the epidemic, growing from \$132 billion in 2018 to \$140 billion in 2020, according to a survey from Statista. \par
 ~\\
-\noindent However, due to remote working, learning, and increasing demand for gaming, laptop sales soared dramatically throughout the pandemic in the past 3 years, the corresponding price of which also fluctuated rapidly, especially when comparing the price between online and brick-and-mortar stores, some shocking price difference may be found in the same laptop model. Because of the lack of awareness of the price changing, customers are kept suffering from spending too much money on products that are not worth it. In order to tackle this problem, we focused on a dataset from Kaggle, and managed to build models using linear regression and neural network regression\cite{chen} to predict laptop prices. 
+\noindent However, due to remote working, learning, and increasing demand for gaming, laptop sales soared dramatically throughout the pandemic in the past 3 years, the corresponding price of which also fluctuated rapidly, especially when comparing the price between online and brick-and-mortar stores, some shocking price difference may be found in the same laptop model. Because of the lack of awareness of the price change, customers keep suffering from spending too much money on products that are not worth it. To tackle this problem, we focused on a dataset from Kaggle and managed to build models using linear regression and neural network regression \cite{chen} to predict laptop prices. 
 
 \section{DATA COLLECTION & ANALYZE}
 
 
 \subsection{DATA SELECTION & COLLECTION }
-Predicting the price of the laptop market needs numerous data, especially for crossing categories prediction and recognizing relationships between vast elements. After researching the laptop components’ category and correlation, the research team selected data from Kaggle 2020 laptop price dataset\cite{kumar_2022}. Kaggle, as a reliable data source, was selected and supervised by many data science researchers, providing detailed data on various factors, including laptop components. With every significant part of the laptop, the dataset also provides lightly-important categories, including weight, RAM, and memory details, which could be used as rows of elements for analyzing more possible results. Kaggle brings a simple data format that is simple to code, supports python programming, and is easily suitable for data preprocessing and visualization. \par
+Predicting the price of the laptop market needs numerous data, especially for crossing categories prediction and recognizing relationships between vast elements. After researching the laptop components’ category and correlation, the research team selected data from Kaggle 2020 laptop price dataset \cite{kumar_2022}. Kaggle, as a reliable data source, was selected and supervised by many data science researchers, providing detailed data on various factors, including laptop components. With every significant part of the laptop, the dataset also provides lightly-important categories, including weight, RAM, and memory details, which could be used as rows of elements for analyzing more possible results. Kaggle brings a simple data format that is simple to code, supports python programming, and is easily suitable for data preprocessing and visualization. \par
 
 ~\\
-\noindent The original data contains a large amount of computer hardware information, including different brands and models of the same type of hardware. The team decided to parameterize the specific computer hardware by finding objective running scores to make the hardware part of the original data set analyzable. Through the search of team members, it was unanimously determined that finding benchmarks\cite{passmark} on reliable public websites is a feasible way to parameterize different hardware in this case. 
+\noindent The original data contains a large amount of computer hardware information, including different brands and models of the same type of hardware. The team decided to parameterize the specific computer hardware by finding objective running scores to make the hardware part of the original data set analyzable. Through the search of team members, it was unanimously determined that finding benchmarks \cite{passmark} on reliable public websites is a feasible way to parameterize different hardware in this case. 
 
 
 \subsection{DATA PROCESSING}
 After querying the data, the team found that the running scores of some hardware had no reference and logic, which made a small part of the hardware running scores far from the regular CPU. Through in-depth research, it is found that a minimal amount of hardware cannot extract this type of hardware from the user because the notebook computer manufacturer uses outdated products and OEM (original equipment manufacturer) products, which leads to the abnormality of this small number of parameters. After screening, the team deleted a few hardware data with abnormal running score results. It was determined that this part of abnormal data had no reference significance in this analysis.\par
 ~\\
-\noindent The public selling price from each memory manufacturer determined the memory benchmark, which significantly provides the difference of performance and price for each memory, though the research of the team found the price and performance of memory are highly connected. Then the dataset after processing is as shown in Table~\ref{tab:Odata}
+\noindent The general selling price from each memory manufacturer determined the memory benchmark, which significantly provides the difference of performance and price for each memory. However, the team's research found the price and performance of memory are highly connected. Then the dataset after processing is as shown in Table~\ref{tab:Odata}.
 ~\\
 
 \begin{table}[ht]
@@ -102,7 +103,7 @@ After querying the data, the team found that the running scores of some hardware
 \multicolumn{1}{l}{}                    & \multicolumn{1}{l}{}                & \multicolumn{1}{l}{}                   & \multicolumn{1}{l}{}                & \multicolumn{1}{l}{}        & \multicolumn{1}{l}{}                & \multicolumn{1}{l}{}              & \multicolumn{1}{l}{}
 \end{tabular}
 }
-\caption{After-process dataset}
+\caption{After-processed dataset}
 \label{tab:Odata}
 \end{table}
 
@@ -116,7 +117,7 @@ After querying the data, the team found that the running scores of some hardware
 	\label{fig:heat}
 \end{figure}
 
-As shown above, we start off with the correlation heat map. It can be seen that all factors we selected are positively correlated with the price in euros, while the GPU benchmark has the largest value of correlation. However, the CPU benchmark appears to have a very small correlation value with the price, which the team did not expect. 
+As shown above, we started off with the correlation heat map. It can be seen that all factors we selected are positively correlated with the price in euros, while the GPU benchmark has the most significant value of correlation. However, the CPU benchmark appears to have a minimal correlation value with the price, which the team did not expect. 
 
 \section{PREDICTION MODEL TRAINING}
 
@@ -124,7 +125,7 @@ As shown above, we start off with the correlation heat map. It can be seen that 
 
 \subsubsection{MULTIPLE LINEAR REGRESSION}
 
-We first approach the data with linear regression. This method models the relationship between a scalar response Y and multiple explanatory variables $X_i$. In this case, benchmarking scores of CPU, GPU, RAM, memory, and weight are inputted as X. Price in euros is set to be Y. To make sure the regression result is fair, we standardized all the X input from 0-1 before the data was input to the regression model. The default OLS regression model from the python library\cite{chen} is then been utilized, the result is shown in the figure below.
+We first approach the data with linear regression. This method model the relationship between a scalar response Y and multiple explanatory variables $X_i$. In this case, benchmarking scores of CPU, GPU, RAM, memory, and weight are inputted as X. Price in euros is set to be Y. To ensure the regression result is fair, we standardized all the X input from 0-1 before the data was input into the regression model. The default OLS regression model from the python library\cite{chen} is then been utilized, the result is shown in the figure below.
 
 \begin{figure}[H]
 	\begin{center}
@@ -134,7 +135,7 @@ We first approach the data with linear regression. This method models the relati
 	\label{fig:OLS}
 \end{figure}
 
-\noindent As shown in Figure~\ref{fig:OLS}, the overall R-squared value is around 0.498 (first row second column), which is considered to be acceptable. Among all the coefficient results, we discovered that the GPU has the highest value (second row in "coef"), which conforms to the heatmap results we generated earlier. 
+\noindent As shown in Figure~\ref{fig:OLS}, the overall R-squared value is around 0.498 (first row second column), which is considered to be acceptable. Among all the coefficient results, we discovered that the GPU has the highest value (second row in "coef"), which conforms to the heatmminimumlts we generated earlier. 
 
 \subsubsection{SINGLE LINEAR REGRESSION}
 
@@ -232,7 +233,7 @@ dense\_19 (Dense)  & (None,  1)   & 6        &  &  \\ \cline{1-3}
 
 \noindent To start with, we split the data into training data and testing data with the proportion of 7:3, 8:2, and 9:1. In these settings, we then standardized each feature of the data using the following code shown in the following list. 
 
-\begin{lstlisting}[language=Python, caption=Python example,basicstyle=\tiny,captionpos=b]
+\begin{lstlisting}[language=Python, caption= Testing-Training Data splitting and Standardization,basicstyle=\tiny,captionpos=b]
 
 X_raw, X_raw_test, Y, Y_test = train_test_split(data[features].values, data[label].values, test_size=0.1, random_state=42)
 
@@ -279,48 +280,44 @@ x \;\;for \;\;\;x\geqslant 0
 
 \begin{lstlisting}[language=Python, caption= Code for training overall data, basicstyle=\tiny,captionpos=b]
 
-model=Sequential([
-    Dense(units=50,kernel_initializer='normal',activation='relu'),
-    #Dropout(0.2),
-    Dense(units=20,kernel_initializer='normal',activation='relu'),
-    #Dropout(0.2),
-    Dense(units=5,kernel_initializer='normal',activation='relu'),
-    #Dropout(0.2),
-    Dense(units=1,kernel_initializer='normal',activation='linear'),
-])
+    model=Sequential([
+        Dense(units=50,kernel_initializer='normal',activation='relu'),    
+        Dense(units=20,kernel_initializer='normal',activation='relu'),
+        Dense(units=5,kernel_initializer='normal',activation='relu'),
+        Dense(units=1,kernel_initializer='normal',activation='linear'),
+    ])
 
-model.compile(
-    optimizer=Adam(learning_rate=0.01),
-    loss="mse",
-    metrics=["mse"])
+    model.compile(
+        optimizer=Adam(learning_rate=0.01),
+        loss="mse",
+        metrics=["mse"])
 
-history = model.fit(
-    x=X,
-    y=Y,
-    batch_size=32,
-    epochs=20,
-    validation_data=(X_test, Y_test),
-    verbose=1,
-    shuffle=True,
-)
+    history = model.fit(
+        x=X,
+        y=Y,
+        batch_size=32,
+        epochs=20,
+        validation_data=(X_test, Y_test),
+        verbose=1,
+        shuffle=True,
+    )
 
 \end{lstlisting}
 
-\noindent When the proportion of training data to testing data is 7:3, after 20 epochs, the MSEs of training data and testing data both converge. The resulting R-squared value in this case is 0.5400939, using the method shown in the following list. A snapshot of the output comparison is shown in Figure~\ref{fig:NN7-8}. An MSE plot is shown in Figure~\ref{fig:NN6}. \\
+\noindent When the proportion of training data to testing data is 7:3, after 20 epochs, the MSEs of training data and testing data both converge. The resulting R-squared value, in this case, is 0.5400939, using the method shown in the following list. A snapshot of the output comparison is shown in Figure~\ref{fig:NN7-8}. An MSE plot is shown in Figure~\ref{fig:net}. \\
 
 \begin{lstlisting}[language=Python, caption= R-Squared output code, basicstyle=\tiny,captionpos=b]
-
 r2 = np.power(yhat - np.mean(Y_test), 2).sum() / np.power(Y_test - np.mean(Y_test), 2).sum()
 r2
 
 \end{lstlisting}
 
-\begin{figure}
+\begin{figure}[H]
          \centering
          \includegraphics[width=\textwidth]{Graphics/Neural Network Images/NN7.png}
 \end{figure}
      
-\begin{figure}
+\begin{figure}[H]
          \centering
          \includegraphics[width=\textwidth]{Graphics/Neural Network Images/NN8.png}
          \caption{Neural network output snapshot for overall data}
@@ -333,7 +330,7 @@ r2
 		\includegraphics[scale=1.0]{Graphics/Neural Network Images/NN6.png}
 	\end{center}
 	\caption{MSE plot for overall data}
-	\label{fig:NN6}
+	\label{fig:net}
 \end{figure}
 
 \noindent As we can see, the outcome above shows that the MSE for the training data changes from 1722238.75 in epoch 1 to 177923.4688 in epoch 20. And the MSE for the testing data changes from 1793438.75 in epoch 1 to 195000.8125 in epoch 20. The $R^2$ of the model is 0.54.\\
@@ -350,7 +347,6 @@ r2
 \noindent We start off this step with data only from Nvidia. The method we used to train the data remained exactly the same, except for the “features” and the number of inputs. The code is shown in the following list. \\
 
 \begin{lstlisting}[language=Python, caption= Code for training Nvidia data, basicstyle=\tiny,captionpos=b]
-
 features_GPU_NV = [ "GPU_benchmark",]
 label = "Price_euros"
 model_GPU_NV=Sequential([
@@ -363,10 +359,9 @@ model_GPU_NV=Sequential([
 \end{lstlisting}
 
 
-\noindent The resulting R-squared value, in this case, is calculated similarly using the method similar to the previous step, which is shown in the following list. A snapshot of the output comparison is shown in Figure~\ref{fig:NN12-13}. An MSE plot is shown in Figure~\ref{fig:NN11}. \\
+\noindent The resulting R-squared value, in this case, is calculated similarly using the method similar to the previous step, which is shown in the following list. A snapshot of the output comparison is shown in Figure~\ref{fig:NN12-13}. An MSE plot is shown in Figure 9. \\
 
 \begin{lstlisting}[language=Python, caption= Code output for MSE Nvidia training, basicstyle=\tiny,captionpos=b]
-
 r2_GPU_NV = np.power(yhat_GPU_NV - np.mean(Y_test_GPU_NV), 2).sum() / np.power(Y_test_GPU_NV - np.mean(Y_test_GPU_NV), 2).sum()
 r2_GPU_NV
     
@@ -390,7 +385,7 @@ r2_GPU_NV
 		\includegraphics[scale=1.0]{Graphics/Neural Network Images/NN11.png}
     \caption{MSE plot for Nvidia data}
 	\end{center}
-	\label{fig:NN11}
+	\label{fig:net2}
 \end{figure}
 
 \noindent As we can see, the outcome above shows that the MSE for the training data changed from 2895840.2500 in epoch 1 to 271110.7188 in epoch 20. And the MSE for the test data changed from 3307747 in epoch 1 to 316232.0938 in epoch 20. The $R^2$ of the model is $0.36932928$.\\
@@ -400,10 +395,9 @@ r2_GPU_NV
 
 %%%%%%%% Neural Network AMD %%%%%%%%%
 
-\noindent Then, we repeat the similar steps for AMD laptop. The training code is shown in the following list. 
+\noindent Then, we repeat similar steps for the AMD laptops. The training code is shown in the following list. 
 
 \begin{lstlisting}[language=Python, caption= Code for training AMD data, basicstyle=\tiny,captionpos=b]
-
 features_GPU_AMD = [ "GPU_benchmark",]
 label = "Price_euros"
 model_GPU_AMD=Sequential([
@@ -414,10 +408,9 @@ model_GPU_AMD=Sequential([
 ])
 \end{lstlisting}
 
-\noindent The resulting R-squared value, in this case, is calculated similarly using the method similar to the previous step, which is shown in following list. A snapshot of the output comparison is shown in Figure~\ref{fig:NN15-16}. An MSE plot is shown in Figure~\ref{fig:NN14}. \\
+\noindent The resulting R-squared value, in this case, is calculated similarly using the method similar to the previous step, which is shown in the following list. A snapshot of the output comparison is shown in Figure~\ref{fig:NN18-19}. An MSE plot is shown in Figure~\ref{fig:NN17}. \\
 
 \begin{lstlisting}[language=Python, caption= Code output for MSE AMD training,basicstyle=\tiny,captionpos=b]
-
 r2_GPU_AMD = np.power(yhat_GPU_AMD - np.mean(Y_test_GPU_AMD), 2).sum() / np.power(Y_test_GPU_AMD - np.mean(Y_test_GPU_AMD), 2).sum()
 r2_GPU_AMD
 
@@ -454,10 +447,9 @@ r2_GPU_AMD
 
 %%%%%%%% Neural Network Intel %%%%%%%%%
 
-\noindent Lastly, we repeat the similar steps for Intel laptop. The training code is shown in the following list. 
+\noindent Lastly, we repeat similar steps for the Intel laptop. The training code is shown in the following list. 
 
 \begin{lstlisting}[language=Python, caption= Code for training Intel data, basicstyle=\tiny,captionpos=b]
-
 features_GPU_Intel = [ "GPU_benchmark",]
 label = "Price_euros"
 model_GPU_Intel=Sequential([
@@ -468,10 +460,9 @@ model_GPU_Intel=Sequential([
 ])
 \end{lstlisting}
 
-\noindent The resulting R-squared value, in this case, is calculated similarly using the method similar to the previous step, which is shown in following list. A snapshot of the output comparison is shown in Figure~\ref{fig:NN18-19}. An MSE plot is shown in Figure~\ref{fig:NN17}. \\
+\noindent The resulting R-squared value, in this case, is calculated similarly using the method similar to the previous step, which is shown in the following list. A snapshot of the output comparison is shown in Figure~\ref{fig:NN24-25}. An MSE plot is shown in Figure~\ref{fig:NN23}. \\
 
 \begin{lstlisting}[language=Python, caption= Code output for MSE Intel training,basicstyle=\tiny,captionpos=b]
-
 r2_GPU_Intel = np.power(yhat_GPU_Intel - np.mean(Y_test_GPU_Intel), 2).sum() / np.power(Y_test_GPU_Intel - np.mean(Y_test_GPU_Intel), 2).sum()
 r2_GPU_Intel
 
@@ -522,7 +513,7 @@ r2_GPU_Intel
 \end{table}
 
 
-\noindent To sum up, we compared four sets of results in Table~\ref{tab:results_table}. Presumably due to the limited amount of data, the neural network model used in this group is not accurate enough comparing to the linear regression method. As the group members kept increasing the ratio of training data to test data, the $R^2$ of the model increased. This implies that the more data involved in training the model, the better the model performs. A potential improving method can be considering a data set with a larger data quantity and training the model more precisely.\\
+\noindent To sum up, we compared four sets of results in Table~\ref{tab:results_table}. Presumably due to the limited amount of data, the neural network model used in this group is not accurate enough compared to the linear regression method. As the group members kept increasing the ratio of training data to test data, the $R^2$ of the model increased. This implies that the more data involved in training the model, the better the model performs. A potential improving method can be considered a data set with a larger data quantity and training the model more precisely.\\
 
 
 
@@ -532,21 +523,21 @@ r2_GPU_Intel
 
 
 
-By collecting several parameters, adding several benchmarks as the new inputs, and this paper constructs a laptop price prediction model, the main work are as follows:\\
+By collecting several parameters, adding several benchmarks as the new inputs, and this paper constructs a laptop price prediction model. The main work is as follows:\\
 
-\subsection{Data Collection}
-To better quantify the relationship between the five parameters we chose and the laptop price, we substituted the score of each laptop component’s theoretical performance to the original model names, namely benchmark. By doing so can we give the potential customers a more precise metric to estimate if the price of the laptops and their components is set appropriately.\\
-\subsection{Linear regression }
-Using python as our programming language, After modeling we have the $R^2$ of using all six parameters equals to 0.498. Due to the $R^2$ 's shortcomings, we chose GPU benchmark as our only independent variable to build the model, as the coefficient of which is much higher than other parameters. As the $R^2$ of which is also not ideal, we divided GPUs into 3 brands. As a result, AMD GPUs have significantly superior $R^2$ ratings than Intel GPUs. We believe this is because Intel's GPU performance in this dataset does not correspond to its price. Then we randomly chose 70\% of the data set as the training data, the rest as test data, as the cross validation method. All of the $R^2$ values for the test data are lower than but near to those for the corresponding training data, suggesting that these models are feasible.\\
-\subsection{Neural Network Regression}
-The second method we use neural network regression, based on experience we set 2 hidden layers. Mean square error was used as our metric, the MSE of training data and test data are relatively close. Additionally, neural network's three $R^2$s are all lower than those of linear regression, which goes somewhat against conventional wisdom. As a result, we increase our ratio of training data to test data from 7:3 to 8:2 to 9:1. We can see the $R^2$ of AMD and Nvidia is keep going up as there are more and more training data comes into play.\\
-
-
+\subsection{DATA COLLECTION}
+To better quantify the relationship between the five parameters we chose and the laptop price, we substituted the score of each laptop component’s theoretical performance to the original model names, namely the benchmark. Doing so can we give the potential customers a more precise metric to estimate if the price of the laptops and their components is set appropriately.\\
+\subsection{LINEAR REGRESSION}
+Using python as our programming language, After modeling, we have the $R^2$ of using all six parameters equal to 0.498. Due to the $R^2$ 's shortcomings, we chose the GPU benchmark as our only independent variable to build the model, the coefficient of which is much higher than other parameters. As the $R^2$ of which is also not ideal, we divided GPUs into 3 brands. As a result, AMD GPUs have significantly superior $R^2$ ratings than Intel GPUs. We believe this is because Intel's GPU performance in this dataset does not correspond to its price. Then we randomly chose 70\% of the data set as the training data, the rest as test data, as the cross-validation method. All of the $R^2$ values for the test data are lower than but near to those for the corresponding training data, suggesting that these models are feasible.\\
+\subsection{NEURAL NETWORK REGRESSION}
+The second method we use neural network regression, based on the experience we set 2 hidden layers. Mean square error was used as our metric. The MSE of training data and test data are relatively close. Additionally, the neural network's three $R^2$s are all lower than those of linear regression, which goes somewhat against conventional wisdom. As a result, we increase our ratio of training data to test data from 7:3 to 8:2 to 9:1. We can see the $R^2$ of AMD and Nvidia keep going up as there are more and more training data comes into play.\\
 
 
 
 
-\section{Future Work}
+
+
+\section{FUTURE WORK}
 
 In this project, our focus is primarily on helping customers who are relatively familiar with laptops, they are required to possess certain knowledge about the models of different computer components, or at least understand what the basic components of laptops are. In the future, we can provide more advice on how to pick the right laptop components totally depending on our customers' preferences and budget, by doing so can we make our project reach a wider application field of different customers and decrease its constraints.\\
 Besides, more data can be absorbed to improve the price prediction accuracy, since when discussing the result of different brands of GPUs, we experienced data inaccuracy due to the shortage of numbers of data on Intel GPUs. We can even broaden the topic from laptops to PCs.\\
@@ -561,7 +552,23 @@ Besides, more data can be absorbed to improve the price prediction accuracy, sin
 %------ To create Appendix with additional stuff -------%
 \newpage
 \appendix
-\section{Appendix}
+\section{APPENDIX}
+
+\href{https://github.com/zw2788/MECE4520\_project/blob/main/MECE\_4520\_LaptopPrediction/Method\_Linear.ipynb}{Code for linear regression (train: test= 7:3)}.\\
+
+
+%Code for linear regression (train: test= 7:3):\\
+
+%\text{https://github.com/zw2788/MECE4520\_project/blob/main/MECE\_4520\_LaptopPrediction/Method\_Linear.ipynb}\\
+\noindent
+\href{https://github.com/zw2788/MECE4520\_project/blob/main/MECE\_4520\_LaptopPrediction/test\_0.3.ipynb}{Code for Neural Network (train: test= 7:3)}.\\
+
+\noindent
+\href{https://github.com/zw2788/MECE4520\_project/blob/main/MECE\_4520\_LaptopPrediction/test_0.2.ipynb}{Code for Neural Network (train: test= 8:2)}.\\
+
+\noindent
+\href{https://github.com/zw2788/MECE4520\_project/blob/main/MECE\_4520\_LaptopPrediction/test\_0.1.ipynb}{Code for Neural Network (train: test= 9:1)}.\\
+
 
 \begin{lstlisting}[language=Python,  basicstyle=\tiny,]
 
